@@ -33,7 +33,7 @@ class AuthController extends Controller
             ]);
         } else {
             return response()->json([
-                'message' => 'Unauthorized',
+                'error' => 'Email and password doesn\'t exist',
             ], 401);
         }}
         
