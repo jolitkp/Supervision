@@ -10,6 +10,7 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 
+  
   public form = {
     email: null,
     password: null
@@ -22,11 +23,11 @@ export class LoginComponent {
   onSubmit() {
      return this.http.post('http://127.0.0.1:8000/api/login-page', this.form).subscribe(
       data => console.log(data),
-      error => console.log(error)
+      error => this.handleError(error)
      );
   }
   
-  /*handleError(error) {
-    this.error = error.error.message;
-  }*/
+  handleError(error : any) {
+    this.error = error.error.error;
+  }
 }
