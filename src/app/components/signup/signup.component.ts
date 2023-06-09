@@ -19,18 +19,20 @@ export class SignupComponent {
     role: null
   };
 
+  public error = null;
+
   constructor( private http: HttpClient){}
 
 
 
   onSubmit(){
-    return this.http.post('http://127.0.0.1:8000/api/signup', this.form).subscribe(
+    return this.http.post('http://127.0.0.1:8000/api/signup-page', this.form).subscribe(
       data => console.log(data),
-      error => this.handleError()
+      error => this.handleError(error)
      );
   }
 
-  handleError(){
-
+  handleError(error : any) {
+    this.error = error.error.error;
   }
 }
