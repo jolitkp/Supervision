@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -9,30 +10,29 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class SignupComponent {
-
+  formData: any = {};
   public form ={
     nom: null,
     prenom: null,
     email: null,
     password: null,
     password_confirm: null,
-    role: null
   };
 
-  public error = null;
+  public error : any = [];
 
-  constructor( private http: HttpClient){}
+  constructor( private user: UserService){}
 
 
 
   onSubmit(){
-    return this.http.post('http://127.0.0.1:8000/api/signup-page', this.form).subscribe(
+    this.user.createUser(this.formData).subscribe(
       data => console.log(data),
       error => this.handleError(error)
      );
   }
 
   handleError(error : any) {
-    this.error = error.error.error;
+    this.error = error.error.errors;
   }
 }

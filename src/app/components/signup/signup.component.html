@@ -1,7 +1,7 @@
-
+<!-- 
 <div class="mt-4 col-8 offset-2">
     <div class="card">
-        <div class="card-header">Login here</div>
+        <div class="card-header">Register here</div>
         <div class="card-body">
 
             <form #signupForm=ngForm  (ngSubmit)="onSubmit()">
@@ -56,7 +56,7 @@
 
                   <div class="col-sm-12 offset-2">
                     
-                    <button type="submit" class="btn btn-primary" [disabled]="!signupForm.valid">S'inscrire'</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!signupForm.valid">S'inscrire</button>
 
                     <a routerLink="/login" class="btn btn-info float-right">Se connecter</a>
 
@@ -67,4 +67,72 @@
               </form>
         </div>
     </div>
-  </div>
+  </div> -->
+  <section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div class="card " style="border-radius: 1rem;">
+            <div class="card-body p-5 text-center">
+              <form #signupForm=ngForm  (ngSubmit)="onSubmit()">
+              <div class="md-3 mt-md-2 pb-3">
+  
+                <h2 class="fw-bold mb-2 text-uppercase">Inscription</h2>
+                <p class="text-white-50 mb-5">Veuillez entrer vos informations</p>
+  
+          
+                <div class="form-outline form-white mb-4">
+                  <label class="form-label" for="typeNameX">Nom</label>
+                  <input type="text" name="nom" id="typeNameX" class="form-control form-control-lg" [(ngModel)]="form.nom" required />
+                </div>
+  
+                <div class="form-outline form-white mb-4">
+                  <label class="form-label" for="typePrenomX">Prenom</label>
+                  <input type="text" name="prenom" id="typePrenomX" class="form-control form-control-lg" [(ngModel)]="form.prenom" required  />
+                </div>
+
+
+                <div class="form-outline form-white mb-4">
+                  <label class="form-label" for="typeEmailX">Email</label>
+                  <input type="email" name="email" id="typeEmailX" class="form-control form-control-lg" [(ngModel)]="form.email" required />
+                </div>
+
+                
+                <div class="alert alert-danger" [hidden]="!error.email">
+                  {{ error.email }}
+                </div>
+
+  
+                <div class="form-outline form-white mb-4">
+                  <label class="form-label" for="typePasswordX">Password</label>
+                  <input type="password" name="password" id="typePasswordX" class="form-control form-control-lg" [(ngModel)]="form.password" required />
+                </div>
+
+                <div class="alert alert-danger" [hidden]="!error.password">
+                  {{ error.password }}
+                </div>
+
+
+                <div class="form-outline form-white mb-4">
+                  <label class="form-label" for="typePasswordX">ConfirmPassword</label>
+                  <input type="password" name="password_confirm" id="typePasswordX" class="form-control form-control-lg" [(ngModel)]="form.password_confirm" required />
+                </div>
+
+                <div class="alert alert-danger" [hidden]="!error.password_confirm">
+                  {{ error.password_confirm }}
+                </div>
+  
+                <button class="btn btn-primary btn-lg px-5" [disabled]="!signupForm.valid" type="submit">S'inscrire</button>
+  
+                
+              </div>
+  
+                <p class="mb-0">Vous avez déjà un compte? <a routerLink="/login" class="text-white-50 fw-bold">Connectez-vous</a>
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
