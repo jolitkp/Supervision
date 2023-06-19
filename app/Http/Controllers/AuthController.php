@@ -67,30 +67,66 @@ class AuthController extends Controller
 
     public function signup(Request $request)
     {
-        $request->validate([
-            'nom' => 'required',
-            'prenom'=> 'required',
-            'email'=> 'required|email|unique:users',
-            'password' => 'required|min:6',
-            'password_confirm' => 'required|same:password',
-            'role'=>'required'
-        
-            
+        $validatedData = $request->validate([
+            'nom'=>'required|string|max:255',
+            'prenom'=>'required|string|max:255',
+            'email'=> 'required|email|unique:users,email',
+            'password'=> 'required|confirmed|min:6',
+            //'password_confirm'=> 'required|same:password',
+
         ]);
 
-        $user = new User;
-        $user->nom = $request->nom;
-        $user->prenom = $request->prenom;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->role = $request->role;
+        $user = User::create([
+            'nom'=> $validatedData['nom'],
+            'nom'=> $validatedData['prenom'],
+            'nom'=> $validatedData['email'],
+            'nom'=> bcrypt($validatedData['password']),
+        ]);
+        // $user->nom = $request->input('nom');
+        // $user->prenom = $request->input('prenom');
+        // $user->email = $request->input('email');
+        // $user->password = Hash::make($request->input('password'));
+        // $user->save();
+
+        return response()->json(
+            $user,
+            201
+        );
+    }
+
+
+    public function blockUser($id){
+        $user = User::findOrFail($id);
+        $user->blocked_at = now();
         $user->save();
 
-        return response()->json([
-            'message' => 'Utilisateur enregistré avec succès',
-            'user' => $user
-        ]);
+        return response()->json(['message'=>'Utilisateur bloqué avec succès']);
     }
+
+
+    public function deleteUser($id){
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return response()->json(['message'=>'Utilisateur supprimé avec succès']);
+    }
+
+
+
+    public function logout()
+    {
+        $user = request()->user();
+
+        if($user){
+            $user->tokens->each(function (Token $token){
+                $token->delete();
+            });
+        }
+
+        return response()->json(['message' => 'Successfully logged out']);
+    }
+
+
 }
 
 
