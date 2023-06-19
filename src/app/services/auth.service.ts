@@ -25,7 +25,7 @@ export class AuthService {
       'Authorization': `Bearer ${this.getAccessToken()}`
     });
 
-    return this.http.post(`${this.apiUrl}/logout`, null, { headers: headers });
+    return this.http.post(`${this.apiUrl}/logout-page`, null, { headers: headers });
   }
 
   refreshToken(): Observable<any> {
@@ -50,6 +50,13 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return !!this.getAccessToken();
+  }
+
+  forgotPassword(email: string): Observable<any> {
+    const formData = new FormData();
+    formData.append('email', email);
+
+    return this.http.post(`${this.apiUrl}/forgot-password`, formData)
   }
 
 }

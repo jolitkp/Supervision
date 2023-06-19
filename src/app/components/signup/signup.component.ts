@@ -19,7 +19,7 @@ export class SignupComponent {
     role: null
   };
 
-  public error = null;
+  public error : any = [];
 
   constructor( private http: HttpClient){}
 
@@ -33,6 +33,6 @@ export class SignupComponent {
   }
 
   handleError(error : any) {
-    this.error = error.error.error;
+    this.error = error.error.errors;
   }
 }
