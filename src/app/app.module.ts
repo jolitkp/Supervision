@@ -26,6 +26,8 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { CreationProjetComponent } from './creation-projet/creation-projet.component';
+import { MainModule } from './main/main.module';
 
 registerLocaleData(en);
 
@@ -41,6 +43,7 @@ registerLocaleData(en);
     SignupComponent,
     ProfilComponent,
     RequestResetComponent,
+    CreationProjetComponent,
     ResponseResetComponent
   ],
   imports: [
@@ -55,7 +58,8 @@ registerLocaleData(en);
     NzMenuModule,
     ReactiveFormsModule,
     NzFormModule,
-    NzButtonModule
+    NzButtonModule,
+    MainModule
   ],
   providers: [ AuthService, { provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

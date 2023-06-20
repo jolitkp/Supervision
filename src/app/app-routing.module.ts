@@ -12,7 +12,9 @@ import { RoleComponent } from './role/role.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
-  { path: 'welcome',  loadChildren: () => import('./app.module').then(m => m.AppModule) },
+  { path: 'welcome', loadChildren: () => import('./app.module').then(m => m.AppModule) },
+  { path: 'projet-creation', loadChildren: () => import('././main/main.module').then(m => m.MainModule) },
+
   {
     path: 'login',
     component: LoginComponent
